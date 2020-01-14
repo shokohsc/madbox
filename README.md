@@ -132,6 +132,7 @@ So many things
 - Setup fake google.com web site and serve results from another search engine, i.e [qwant]([https://www.qwant.com](https://www.qwant.com))
 - [Ansible]([https://github.com/ansible/ansible](https://github.com/ansible/ansible)) playbook to skip all manual steps
 - [Docker swarm]([https://docs.docker.com/engine/swarm/](https://docs.docker.com/engine/swarm/)) for container & volumes High Availability
+- Store container logs to elasticsearch via filebeat
 
 # Comments
 
