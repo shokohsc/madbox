@@ -99,7 +99,7 @@ Edit two files to replace SPOOFED_IP
 
 # How long did it take ?
 
-Done in one evening (4-5 hours)
+Done in one evening (4-5 hours) and a morning (3 hours)
 
 # Why was it done like this ?
 It basically goes like editing your /etc/hosts file on unix !
