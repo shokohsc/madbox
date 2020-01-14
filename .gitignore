@@ -1,0 +1,8 @@
+.git
+
+config/openvpn/
+config/traefik/certs/
+
+.DS_Store
+
+*.ovpn
