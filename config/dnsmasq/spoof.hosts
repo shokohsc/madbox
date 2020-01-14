@@ -1,0 +1,2 @@
+######### replace SPOOFED_IP with VPN_HOST so it points to traefik reverse proxy #########
+SPOOFED_IP www.google.com google.com

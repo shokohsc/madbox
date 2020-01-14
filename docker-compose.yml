@@ -1,0 +1,65 @@
+version: '2.4'
+
+services:
+
+    # https://github.com/kylemanna/docker-openvpn
+    openvpn: # VPN server
+        container_name: openvpn
+        image: kylemanna/openvpn
+        tty: true
+        cap_add:
+            - net_admin
+        restart: ${RESTART_MODE}
+        ports:
+            - "1194:1194/udp"
+        volumes:
+            - ./config/openvpn:/etc/openvpn
+        labels:
+            - "traefik.enable=false"
+
+    # https://github.com/jpillora/docker-dnsmasq
+    dnsmasq: # Spoof DNS server
+        container_name: dnsmasq
+        image: jpillora/dnsmasq
+        restart: ${RESTART_MODE}
+        ports:
+            - "53:53/udp"
+        volumes:
+            - ./config/dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf
+            - ./config/dnsmasq/spoof.hosts:/etc/spoof.hosts
+        logging:
+            options:
+                max-size: "10m"
+        labels:
+            - "traefik.enable=true"
+            - "traefik.frontend.rule=Host:dnsmasq.${DOMAIN}"
+            - "traefik.port=8080"
+
+    # https://docs.traefik.io/v1.7/
+    traefik: # Reverse proxy
+        container_name: traefik
+        image: traefik:maroilles-alpine
+        restart: ${RESTART_MODE}
+        command: --configFile=/etc/traefik/traefik.toml
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - ./config/traefik/traefik.toml:/etc/traefik/traefik.toml
+        labels:
+            - "traefik.enable=true"
+            - "traefik.frontend.rule=Host:traefik.${DOMAIN}"
+            - "traefik.port=8080"
+
+    # https://hub.docker.com/_/nginx
+    nginx: # Web server
+        image: nginx
+        container_name: nginx
+        restart: ${RESTART_MODE}
+        volumes:
+            - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
+        labels:
+            - "traefik.enable=true"
+            - "traefik.frontend.rule=Host:google.com,www.google.com"
+            - "traefik.port=80"
