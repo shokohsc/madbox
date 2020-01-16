@@ -6,11 +6,14 @@
 ### Server
 - root access
 - ports 53/udp, 1194/udp, 80/tcp ,443/tcp available
-- [Docker]([https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/))
-- [Docker-compose]([https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/))
+- [Docker](https://docs.docker.com/get-docker/)
+
+[EC2-AWS](https://serverfault.com/questions/836198/how-to-install-docker-on-aws-ec2-instance-with-ami-ce-ee-update)
+
+- [Docker-compose](https://docs.docker.com/compose/install/)
 
 ### Client
-- [Openvpn client]([https://openvpn.net/](https://openvpn.net/))
+- [Openvpn client](https://openvpn.net/)
 
 ## VPN setup [kylemanna/docker-openvpn](https://github.com/kylemanna/docker-openvpn)
 
